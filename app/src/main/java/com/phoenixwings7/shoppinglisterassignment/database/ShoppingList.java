@@ -23,9 +23,9 @@ public class ShoppingList {
     public boolean isArchived = false;
 
     @Ignore
-    private int groceries_done = 0;
+    private final int groceries_done = 0;
     @Ignore
-    private ArrayList<ShoppingItem> groceries = new ArrayList<>();
+    private final ArrayList<ShoppingItem> groceries = new ArrayList<>();
 
 
 
