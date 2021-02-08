@@ -25,6 +25,7 @@ public interface MainMVP {
         void onDestroyView();
         void saveShoppingList(ShoppingList newShoppingList);
         LiveData<List<ShoppingList>> getPlaceholderFragmentsContentFromDB(int tabPosition);
+        void newListFabClicked();
     }
 
     interface PlaceholderFragment {

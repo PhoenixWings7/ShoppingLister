@@ -6,4 +6,6 @@
     <string name="tab_2">Archived Shopping Lists</string>
 
     <string name="default_fragment_info">Loading...</string>
+    <string name="add_new_shopping_list">Add new shopping list</string>
+    <string name="add_new_item">Add new item</string>
 </resources>

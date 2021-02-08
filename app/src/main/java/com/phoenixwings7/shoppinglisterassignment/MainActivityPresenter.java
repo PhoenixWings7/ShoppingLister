@@ -52,4 +52,9 @@ public class MainActivityPresenter implements MainMVP.Presenter {
         }
     }
 
+    @Override
+    public void newListFabClicked() {
+        mainView.startNewListActivity();
+    }
+
 }

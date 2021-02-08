@@ -1,11 +1,14 @@
 package com.phoenixwings7.shoppinglisterassignment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingList;
@@ -46,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
             }
         });
 
+        // Set fab callback
+        FloatingActionButton fab = findViewById(R.id.new_list_fab);
+        fab.setOnClickListener(view -> mainPresenter.newListFabClicked());
+
     }
 
     @Override
@@ -70,11 +77,21 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
     @Override
     public void startNewListActivity() {
-
+        Intent intent = new Intent(this, NewListActivity.class);
+        startActivityForResult(intent, NewListActivity.REQUEST_CODE);
     }
 
     @Override
     public void showListsInGUI(List<ShoppingList> shoppingLists) {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NewListActivity.REQUEST_CODE && requestCode == RESULT_OK) {
+            //TODO
+        }
 
     }
 }
