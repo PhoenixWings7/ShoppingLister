@@ -8,16 +8,11 @@
     tools:context=".view.PlaceholderFragment"
     android:padding="@dimen/default_padding">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="top|start">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            tools:listitem="@layout/recyclerview_list_placeholder"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        tools:listitem="@layout/recyclerview_list_placeholder"/>
 
 </FrameLayout>
