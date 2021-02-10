@@ -10,4 +10,6 @@
     <string name="add_new_item">Add new item</string>
     <string name="label_list_title">Your list\'s title</string>
     <string name="save">Save</string>
+    <string name="default_item_name">Your Item</string>
+    <string name="default_list_title">Your List Title</string>
 </resources>

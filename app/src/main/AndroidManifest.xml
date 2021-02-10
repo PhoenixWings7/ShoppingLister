@@ -11,13 +11,17 @@
         android:theme="@style/Theme.ShoppingListerAssignment">
         <activity android:name=".view.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.NewListActivity"
-            android:parentActivityName=".view.MainActivity">
-        </activity>
+        <activity
+            android:name=".view.NewListActivity"
+            android:parentActivityName=".view.MainActivity" />
+        <activity
+            android:name=".view.ListDetailsActivity"
+            android:parentActivityName=".view.MainActivity"/>
     </application>
 
 </manifest>

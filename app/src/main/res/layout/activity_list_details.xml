@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ListDetailsActivity">
+
+    <TextView
+        android:id="@+id/detail_view_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/default_list_title"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/details_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_view_list_title"
+        tools:listitem="@layout/recyclerview_single_item_view"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_item_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/default_padding"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/add_new_item" />
+
+    <Button
+        android:id="@+id/save_details_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/save"
+        style="@style/SaveButton"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
