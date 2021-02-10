@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingListerAssignment">
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,11 +19,13 @@
         </activity>
         <activity
             android:name=".view.NewListActivity"
-            android:parentActivityName=".view.MainActivity" />
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.ListDetailsActivity"
             android:parentActivityName=".view.MainActivity"
-            android:label="@string/list_details_activity_label"/>
+            android:label="@string/list_details_activity_label"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
