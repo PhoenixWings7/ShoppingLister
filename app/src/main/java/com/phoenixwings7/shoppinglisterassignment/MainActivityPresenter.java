@@ -19,7 +19,7 @@ public class MainActivityPresenter implements MainMVP.Presenter {
     private LiveData<List<ShoppingList>> archivedShoppingLists;
 
 
-    MainActivityPresenter(MainMVP.View mainView, Context appContext) {
+    public MainActivityPresenter(MainMVP.View mainView, Context appContext) {
         this.mainView = mainView;
         setUpDAO(appContext);
         setUpLiveData();

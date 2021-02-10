@@ -1,4 +1,4 @@
-package com.phoenixwings7.shoppinglisterassignment;
+package com.phoenixwings7.shoppinglisterassignment.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.phoenixwings7.shoppinglisterassignment.R;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingList;
 
 import java.util.ArrayList;

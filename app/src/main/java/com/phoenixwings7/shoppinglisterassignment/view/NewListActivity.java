@@ -1,4 +1,4 @@
-package com.phoenixwings7.shoppinglisterassignment;
+package com.phoenixwings7.shoppinglisterassignment.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.phoenixwings7.shoppinglisterassignment.R;
 
 public class NewListActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 123;

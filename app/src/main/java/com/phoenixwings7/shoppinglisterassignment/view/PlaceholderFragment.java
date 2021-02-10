@@ -1,4 +1,4 @@
-package com.phoenixwings7.shoppinglisterassignment;
+package com.phoenixwings7.shoppinglisterassignment.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,8 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.phoenixwings7.shoppinglisterassignment.MainMVP;
+import com.phoenixwings7.shoppinglisterassignment.R;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingList;
 
 import java.util.List;

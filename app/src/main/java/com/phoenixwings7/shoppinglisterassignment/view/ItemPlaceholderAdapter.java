@@ -1,4 +1,4 @@
-package com.phoenixwings7.shoppinglisterassignment;
+package com.phoenixwings7.shoppinglisterassignment.view;
 
 import android.view.ViewGroup;
 
