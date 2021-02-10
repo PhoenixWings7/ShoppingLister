@@ -15,8 +15,6 @@ import com.phoenixwings7.shoppinglisterassignment.DetailsActivityPresenter;
 import com.phoenixwings7.shoppinglisterassignment.R;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingItem;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class ListDetailsActivity  extends AppCompatActivity implements DetailsActivityMVP.View {
@@ -47,9 +45,10 @@ public class ListDetailsActivity  extends AppCompatActivity implements DetailsAc
 
         // set recyclerview for items
         RecyclerView itemListRecyclerView = findViewById(R.id.details_recyclerview);
-        itemPlaceholderAdapter = new ItemPlaceholderAdapter();
+        itemPlaceholderAdapter = new ItemPlaceholderAdapter(this);
         itemListRecyclerView.setAdapter(itemPlaceholderAdapter);
         itemListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        presenter.showListItemsInGUI(listID);
 
         // set response for fab
         FloatingActionButton fab = findViewById(R.id.add_item_fab);

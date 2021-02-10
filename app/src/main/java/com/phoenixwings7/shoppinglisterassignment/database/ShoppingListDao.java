@@ -15,7 +15,7 @@ public interface ShoppingListDao {
     @Query("SELECT * FROM shopping_lists WHERE is_archived = 1 ORDER BY id ASC")
     LiveData<List<ShoppingList>> getArchivedShoppingLists();
 
-    @Query("SELECT title FROM shopping_lists WHERE id = :id4")
+    @Query("SELECT title FROM shopping_lists WHERE id = :id")
     String getShoppingListTitle(int id);
 
     @Insert(entity = ShoppingList.class)

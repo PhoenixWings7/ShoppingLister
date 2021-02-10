@@ -48,4 +48,7 @@ public class ShoppingList {
         return isArchived;
     }
 
+    public int getId() {
+        return id;
+    }
 }

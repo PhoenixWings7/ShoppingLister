@@ -12,6 +12,7 @@ public interface MainMVP {
 
     interface View {
         void startNewListActivity();
+        void startListDetailsActivity(int listId, String listTitle);
     }
 
     interface Presenter {
@@ -20,6 +21,7 @@ public interface MainMVP {
         void saveShoppingList(String title);
         LiveData<List<ShoppingList>> getPlaceholderFragmentsContent(int tabPosition);
         void newListFabClicked();
+        void showListDetails(int clickedListId);
     }
 
     interface PlaceholderFragment {

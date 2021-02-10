@@ -44,7 +44,7 @@ public class PlaceholderFragment extends Fragment implements MainMVP.Placeholder
         // Set RecyclerView for showing shopping lists
         RecyclerView shoppingListsRecyclerView = view.findViewById(R.id.main_recycler_view);
 
-        listPlaceholderAdapter = new ListPlaceholderAdapter(getContext());
+        listPlaceholderAdapter = new ListPlaceholderAdapter(getContext(), mainActivityPresenter);
         shoppingListsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         shoppingListsRecyclerView.setAdapter(listPlaceholderAdapter);
         setDataObserver(mainActivityPresenter.getPlaceholderFragmentsContent(tabIndex));

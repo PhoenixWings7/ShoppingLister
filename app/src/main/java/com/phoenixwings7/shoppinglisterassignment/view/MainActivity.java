@@ -65,4 +65,16 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
         }
 
     }
+
+    @Override
+    public void startListDetailsActivity(int listId, String listTitle) {
+        Intent intent = new Intent(this, ListDetailsActivity.class);
+
+        Bundle extras = new Bundle();
+        extras.putInt(ListDetailsActivity.EXTRA_LIST_ID, listId);
+        extras.putString(ListDetailsActivity.EXTRA_LIST_TITLE, listTitle);
+        intent.putExtras(extras);
+
+        startActivity(intent);
+    }
 }

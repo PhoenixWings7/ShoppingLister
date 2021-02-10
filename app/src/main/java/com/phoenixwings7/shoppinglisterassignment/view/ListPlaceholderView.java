@@ -11,6 +11,7 @@ import com.phoenixwings7.shoppinglisterassignment.R;
 public class ListPlaceholderView extends RecyclerView.ViewHolder {
     final TextView title_view;
     final TextView subtitle_view;
+    int position;
 
     public ListPlaceholderView(@NonNull View itemView) {
         super(itemView);
@@ -18,5 +19,8 @@ public class ListPlaceholderView extends RecyclerView.ViewHolder {
         this.subtitle_view = itemView.findViewById(R.id.subtitle_holder);
     }
 
+    void setOnClickListener(View.OnClickListener onClickListener) {
+        itemView.setOnClickListener(onClickListener);
+    }
 
 }

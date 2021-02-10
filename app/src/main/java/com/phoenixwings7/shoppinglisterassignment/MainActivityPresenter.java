@@ -67,4 +67,19 @@ public class MainActivityPresenter implements MainMVP.Presenter {
         assert mainView != null;
         mainView.startNewListActivity();
     }
+
+    @Override
+    public void showListDetails(int clickedListId) {
+        String title = getShoppingListTitleById(clickedListId);
+        mainView.startListDetailsActivity(clickedListId, title);
+    }
+
+    private String getShoppingListTitleById(int listId) {
+        for (ShoppingList shoppingList: activeShoppingLists.getValue()) {
+            if (shoppingList.id == listId) {
+                return shoppingList.title;
+            }
+        }
+        return null;
+    }
 }
