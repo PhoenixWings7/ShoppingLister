@@ -3,12 +3,12 @@ package com.phoenixwings7.shoppinglisterassignment.database;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(primaryKeys = {"id"}, tableName = "items")
+@Entity(tableName = "items")
 public class ShoppingItem {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
     public int id;
 
     @ForeignKey(entity = ShoppingList.class, parentColumns = {"list_id"}, childColumns = "id")
@@ -19,11 +19,12 @@ public class ShoppingItem {
     public int amount = 1;
     public boolean checked = false;
 
+    @Ignore
     public ShoppingItem(String name) {
         this.name = name;
     }
 
-    ShoppingItem(String name, int amount) {
+    public ShoppingItem(String name, int amount) {
         this(name);
         this.amount = amount;
     }

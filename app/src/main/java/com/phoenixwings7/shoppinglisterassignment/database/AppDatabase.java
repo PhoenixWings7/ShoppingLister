@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {ShoppingList.class}, version = 1)
+@Database(entities = {ShoppingList.class, ShoppingItem.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
     private static final String APP_DB_NAME = "shopping_lister_db";
@@ -22,4 +22,5 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract ShoppingListDao shoppingListDao();
+    public abstract ShoppingItemsDao shoppingItemsDao();
 }
