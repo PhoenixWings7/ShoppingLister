@@ -14,12 +14,16 @@ import com.phoenixwings7.shoppinglisterassignment.database.ShoppingItem;
 
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholderView>{
     private List<ShoppingItem> itemsList;
     private LayoutInflater layoutInflater;
+    private DetailsItemViewAdapterContract.DetailsActivity detailsActivity;
 
-    public ItemPlaceholderAdapter(Context context) {
+    public ItemPlaceholderAdapter(Context context, DetailsItemViewAdapterContract.DetailsActivity detailsActivity) {
         layoutInflater = LayoutInflater.from(context);
+        this.detailsActivity = detailsActivity;
     }
 
     @NonNull
@@ -38,6 +42,26 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
         holder.itemTitle.setText(itemName);
         Resources res = layoutInflater.getContext().getResources();
         holder.itemAmount.setText(res.getString(R.string.item_amount, itemAmount));
+
+        holder.itemTitle.setOnFocusChangeListener((view, hasFocus) -> {
+            if (!hasFocus) {
+                String newName = holder.itemTitle.getText().toString();
+                if(!newName.equals(itemName)) {
+                    detailsActivity.onItemNameChanged(newName, item.id);
+                }
+                int newAmount;
+                try {
+                    newAmount = parseInt(holder.itemAmount.getText().toString());
+                }
+                catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                if (newAmount != item.amount) {
+                    detailsActivity.onItemAmountChanged(newAmount, item.id);
+                }
+            }
+        });
     }
 
     @Override

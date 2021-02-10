@@ -17,7 +17,8 @@ import com.phoenixwings7.shoppinglisterassignment.database.ShoppingItem;
 
 import java.util.List;
 
-public class ListDetailsActivity  extends AppCompatActivity implements DetailsActivityMVP.View {
+public class ListDetailsActivity  extends AppCompatActivity implements DetailsActivityMVP.View,
+        DetailsItemViewAdapterContract.DetailsActivity {
 
     public static final String EXTRA_LIST_TITLE = "list_title";
     public static final String EXTRA_LIST_ID = "list_id";
@@ -45,7 +46,7 @@ public class ListDetailsActivity  extends AppCompatActivity implements DetailsAc
 
         // set recyclerview for items
         RecyclerView itemListRecyclerView = findViewById(R.id.details_recyclerview);
-        itemPlaceholderAdapter = new ItemPlaceholderAdapter(this);
+        itemPlaceholderAdapter = new ItemPlaceholderAdapter(this, this);
         itemListRecyclerView.setAdapter(itemPlaceholderAdapter);
         itemListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         presenter.showListItemsInGUI(listID);
@@ -73,5 +74,15 @@ public class ListDetailsActivity  extends AppCompatActivity implements DetailsAc
     @Override
     public LifecycleOwner getViewLifecycleOwner() {
         return this;
+    }
+
+    @Override
+    public void onItemNameChanged(String newName, int itemId) {
+        presenter.changeItemName(newName, itemId);
+    }
+
+    @Override
+    public void onItemAmountChanged(int amount, int itemId) {
+        presenter.changeItemAmount(amount, itemId);
     }
 }

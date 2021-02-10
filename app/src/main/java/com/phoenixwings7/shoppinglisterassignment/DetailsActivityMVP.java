@@ -14,6 +14,8 @@ public interface DetailsActivityMVP {
         void showListItemsInGUI(int listID);
         void addShoppingItem(String name);
         void addShoppingItem(String name, int amount);
+        void changeItemName(String newName, int itemId);
+        void changeItemAmount(int newAmount, int itemId);
     }
 
     interface View {

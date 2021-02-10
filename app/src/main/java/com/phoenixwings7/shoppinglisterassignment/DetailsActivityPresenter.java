@@ -8,6 +8,7 @@ import com.phoenixwings7.shoppinglisterassignment.database.AppDatabase;
 import com.phoenixwings7.shoppinglisterassignment.database.InsertItemsAsyncTask;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingItem;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingItemsDao;
+import com.phoenixwings7.shoppinglisterassignment.database.UpdateItemAsyncTask;
 
 import java.util.List;
 
@@ -51,6 +52,24 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
         }
     }
 
+    @Override
+    public void changeItemName(String newName, int itemId) {
+        ShoppingItem item = getItemById(itemId);
+        if (item != null) {
+            item.name = newName;
+            updateItemInDB(item);
+        }
+    }
+
+    @Override
+    public void changeItemAmount(int newAmount, int itemId) {
+        ShoppingItem item = getItemById(itemId);
+        if (item != null) {
+            item.amount = newAmount;
+            updateItemInDB(item);
+        }
+    }
+
     private void setUpLiveData(int listID) {
         itemsListLiveData = shoppingItemsDao.getShoppingListItems(listID);
         itemsListLiveData.observe(detailsView.getViewLifecycleOwner(),
@@ -59,5 +78,20 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
 
     private List<ShoppingItem> getShoppingListItems(){
         return itemsListLiveData.getValue();
+    }
+
+    private ShoppingItem getItemById(int itemId) {
+        List<ShoppingItem> shoppingItems = itemsListLiveData.getValue();
+        for (ShoppingItem item:shoppingItems) {
+            if (item.id == itemId) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    private void updateItemInDB(ShoppingItem shoppingItem) {
+        UpdateItemAsyncTask asyncTask = new UpdateItemAsyncTask(shoppingItemsDao);
+        asyncTask.execute(shoppingItem);
     }
 }
