@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 
 @Entity(tableName = "shopping_lists",
-        indices = {@Index(value = {"title", "is_archived"}, unique = true)})
+        indices = {@Index(value = {"title", "is_archived"})})
 
 public class ShoppingList {
     @PrimaryKey(autoGenerate = true)
@@ -28,6 +28,9 @@ public class ShoppingList {
     private final ArrayList<ShoppingItem> groceries = new ArrayList<>();
 
 
+    public ShoppingList(String title) {
+        this.title = title;
+    }
 
     public String getTitle() {
         return title;

@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
+    <EditText
+        android:id="@+id/list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:minLines="1"
+        android:maxLines="1"
+        android:hint="@string/label_list_title"
+        android:inputType="textShortMessage"
+        android:layout_margin="@dimen/default_padding"/>
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="@dimen/default_padding"
+        android:text="@string/save"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

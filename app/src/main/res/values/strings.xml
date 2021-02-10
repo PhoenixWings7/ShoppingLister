@@ -8,4 +8,6 @@
     <string name="default_fragment_info">Loading...</string>
     <string name="add_new_shopping_list">Add new shopping list</string>
     <string name="add_new_item">Add new item</string>
+    <string name="label_list_title">Your list\'s title</string>
+    <string name="save">Save</string>
 </resources>

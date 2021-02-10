@@ -1,6 +1,5 @@
 package com.phoenixwings7.shoppinglisterassignment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,9 +10,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.phoenixwings7.shoppinglisterassignment.database.ShoppingList;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainMVP.View {
     public static final int[] TAB_TITLES_IDS = {R.string.tab_1, R.string.tab_2};
@@ -39,16 +35,6 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
                 ((tab, position) -> tab.setText(TAB_TITLES_IDS[position])));
         tabLayoutMediator.attach();
 
-        // Set a callback to the presenter to set content of the placeholder
-        // based on a selected tab index (position)
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                mainPresenter.getPlaceholderFragmentsContentFromDB(position);
-            }
-        });
-
         // Set fab callback
         FloatingActionButton fab = findViewById(R.id.new_list_fab);
         fab.setOnClickListener(view -> mainPresenter.newListFabClicked());
@@ -56,23 +42,9 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     }
 
     @Override
-    public void setPresenter(MainMVP.Presenter presenter) {
-        this.mainPresenter = presenter;
-    }
-
-    @Override
-    public MainMVP.Presenter getMainPresenter() {
-        return this.mainPresenter;
-    }
-
-    @Override
-    public void onDestroyMainActivity() {
-
-    }
-
-    @Override
-    public Context getContext() {
-        return null;
+    protected void onDestroy() {
+        super.onDestroy();
+        mainPresenter.onDestroyView();
     }
 
     @Override
@@ -82,15 +54,11 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     }
 
     @Override
-    public void showListsInGUI(List<ShoppingList> shoppingLists) {
-
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == NewListActivity.REQUEST_CODE && requestCode == RESULT_OK) {
-            //TODO
+        if (requestCode == NewListActivity.REQUEST_CODE && resultCode == RESULT_OK) {
+            String listTitle = data.getStringExtra(NewListActivity.RESULT_TITLE);
+            mainPresenter.saveShoppingList(listTitle);
         }
 
     }

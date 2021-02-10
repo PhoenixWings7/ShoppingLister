@@ -9,12 +9,10 @@ import java.util.List;
 
 @Dao
 public interface ShoppingListDao {
-    @Query("SELECT * FROM shopping_lists " +
-            "WHERE NOT is_archived = 'true'")
+    @Query("SELECT * FROM shopping_lists WHERE NOT is_archived ORDER BY id ASC")
     LiveData<List<ShoppingList>> getActiveShoppingLists();
 
-    @Query("SELECT * FROM shopping_lists " +
-            "WHERE is_archived = 'true'")
+    @Query("SELECT * FROM shopping_lists WHERE is_archived = 1 ORDER BY id ASC")
     LiveData<List<ShoppingList>> getArchivedShoppingLists();
 
 

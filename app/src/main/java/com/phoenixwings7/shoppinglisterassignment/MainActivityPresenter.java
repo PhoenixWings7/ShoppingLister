@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
 import com.phoenixwings7.shoppinglisterassignment.database.AppDatabase;
+import com.phoenixwings7.shoppinglisterassignment.database.InsertListAsyncTask;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingList;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingListDao;
 
@@ -14,10 +15,19 @@ import java.util.List;
 public class MainActivityPresenter implements MainMVP.Presenter {
     @Nullable private MainMVP.View mainView;
     private ShoppingListDao shoppingListDao;
+    private LiveData<List<ShoppingList>> activeShoppingLists;
+    private LiveData<List<ShoppingList>> archivedShoppingLists;
+
 
     MainActivityPresenter(MainMVP.View mainView, Context appContext) {
         this.mainView = mainView;
         setUpDAO(appContext);
+        setUpLiveData();
+    }
+
+    private void setUpLiveData() {
+        this.activeShoppingLists = shoppingListDao.getActiveShoppingLists();
+        this.archivedShoppingLists = shoppingListDao.getArchivedShoppingLists();
     }
 
     @Override
@@ -37,24 +47,24 @@ public class MainActivityPresenter implements MainMVP.Presenter {
     }
 
     @Override
-    public void saveShoppingList(ShoppingList newShoppingList) {
-        shoppingListDao.saveShoppingList(newShoppingList);
+    public void saveShoppingList(String title) {
+        InsertListAsyncTask insertListAsyncTask = new InsertListAsyncTask(shoppingListDao);
+        insertListAsyncTask.execute(new ShoppingList(title));
     }
 
     @Override
-    public LiveData<List<ShoppingList>> getPlaceholderFragmentsContentFromDB(int tabPosition) {
-
+    public LiveData<List<ShoppingList>> getPlaceholderFragmentsContent(int tabPosition) {
         switch (tabPosition) {
             case 1:
-                return shoppingListDao.getArchivedShoppingLists();
+                return archivedShoppingLists;
             default:
-                return shoppingListDao.getActiveShoppingLists();
+                return activeShoppingLists;
         }
     }
 
     @Override
     public void newListFabClicked() {
+        assert mainView != null;
         mainView.startNewListActivity();
     }
-
 }
