@@ -85,4 +85,9 @@ public class ListDetailsActivity  extends AppCompatActivity implements DetailsAc
     public void onItemAmountChanged(int amount, int itemId) {
         presenter.changeItemAmount(amount, itemId);
     }
+
+    @Override
+    public void onCheckboxStateChanged(boolean isChecked, int itemId) {
+        presenter.changeItemCheckedState(isChecked, itemId);
+    }
 }

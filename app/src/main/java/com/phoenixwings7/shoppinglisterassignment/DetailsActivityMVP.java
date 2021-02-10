@@ -16,6 +16,7 @@ public interface DetailsActivityMVP {
         void addShoppingItem(String name, int amount);
         void changeItemName(String newName, int itemId);
         void changeItemAmount(int newAmount, int itemId);
+        void changeItemCheckedState(boolean isChecked, int itemId);
     }
 
     interface View {

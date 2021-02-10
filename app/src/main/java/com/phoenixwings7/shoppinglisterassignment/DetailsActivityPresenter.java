@@ -70,6 +70,13 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
         }
     }
 
+    @Override
+    public void changeItemCheckedState(boolean isChecked, int itemId) {
+        ShoppingItem item = getItemById(itemId);
+        item.checked = isChecked;
+        updateItemInDB(item);
+    }
+
     private void setUpLiveData(int listID) {
         itemsListLiveData = shoppingItemsDao.getShoppingListItems(listID);
         itemsListLiveData.observe(detailsView.getViewLifecycleOwner(),
