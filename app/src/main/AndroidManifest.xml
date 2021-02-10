@@ -21,7 +21,8 @@
             android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".view.ListDetailsActivity"
-            android:parentActivityName=".view.MainActivity"/>
+            android:parentActivityName=".view.MainActivity"
+            android:label="@string/list_details_activity_label"/>
     </application>
 
 </manifest>
