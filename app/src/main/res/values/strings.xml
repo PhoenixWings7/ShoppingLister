@@ -13,4 +13,5 @@
     <string name="default_item_name">Your Item</string>
     <string name="default_list_title">Your List Title</string>
     <string name="list_details_activity_label">List details</string>
+    <string name="item_amount">Amount: %s</string>
 </resources>

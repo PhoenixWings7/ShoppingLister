@@ -1,6 +1,7 @@
 package com.phoenixwings7.shoppinglisterassignment.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,8 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
         String itemAmount = String.valueOf(item.amount);
 
         holder.itemTitle.setText(itemName);
-        holder.itemAmount.setText(itemAmount);
+        Resources res = layoutInflater.getContext().getResources();
+        holder.itemAmount.setText(res.getString(R.string.item_amount, itemAmount));
     }
 
     @Override
