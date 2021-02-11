@@ -1,0 +1,12 @@
+/build
+
+# IDE files
+.idea/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Gradle generated files
+*.gradle/
+build.gradle
+gradle*
