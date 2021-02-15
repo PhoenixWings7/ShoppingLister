@@ -1,12 +1,10 @@
 package com.phoenixwings7.shoppinglisterassignment.view;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,8 +40,7 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
         String itemAmount = String.valueOf(item.amount);
 
         holder.itemTitle.setText(itemName);
-        Resources res = layoutInflater.getContext().getResources();
-        holder.itemAmount.setText(res.getString(R.string.item_amount, itemAmount));
+        holder.itemAmount.setText(itemAmount);
         holder.checkBox.setChecked(item.checked);
 
         holder.itemTitle.setOnFocusChangeListener((view, hasFocus) -> {
@@ -52,6 +49,11 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
                 if(!newName.equals(itemName)) {
                     detailsActivity.onItemNameChanged(newName, item.id);
                 }
+            }
+        });
+
+        holder.itemAmount.setOnFocusChangeListener(((view, hasFocus) -> {
+            if (!hasFocus) {
                 int newAmount;
                 try {
                     newAmount = parseInt(holder.itemAmount.getText().toString());
@@ -64,7 +66,7 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
                     detailsActivity.onItemAmountChanged(newAmount, item.id);
                 }
             }
-        });
+        }));
 
         holder.checkBox.setOnClickListener((view) -> {
             CheckBox checkBoxView = (CheckBox) view;

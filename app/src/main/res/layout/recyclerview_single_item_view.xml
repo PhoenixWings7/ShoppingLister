@@ -6,9 +6,7 @@
     android:padding="@dimen/default_padding"
     android:orientation="vertical"
     android:divider="@color/green_main"
-    android:showDividers="end"
-    android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:showDividers="end">
     <EditText
         android:id="@+id/item_title"
         android:layout_width="match_parent"
@@ -19,6 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <TextView
+            android:id="@+id/item_amount_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ItemSubtitle"
+            android:layout_marginEnd="@dimen/label_end_margin"
+            android:text="@string/item_amount"
+            android:labelFor="@id/item_amount"/>
         <EditText
             android:id="@+id/item_amount"
             android:layout_width="wrap_content"

@@ -5,20 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ListDetailsActivity">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/detail_view_list_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/default_list_title"/>
+        android:text="@string/default_list_title"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/details_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_view_list_title"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         tools:listitem="@layout/recyclerview_single_item_view"/>
+
+    <Button
+        android:id="@+id/save_details_btn"
+        android:text="@string/save"
+        android:layout_gravity="center"
+        style="@style/SaveButton"/>
+
+</LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_item_fab"
@@ -30,13 +43,5 @@
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_input_add"
         android:contentDescription="@string/add_new_item" />
-
-    <Button
-        android:id="@+id/save_details_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="@string/save"
-        style="@style/SaveButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
