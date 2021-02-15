@@ -32,9 +32,10 @@ public class ListDetailsActivity  extends AppCompatActivity implements DetailsAc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_details);
 
-        if (savedInstanceState != null) {
-            listID = savedInstanceState.getInt(EXTRA_LIST_ID);
-            listTitle = savedInstanceState.getString(EXTRA_LIST_TITLE);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            listID = extras.getInt(EXTRA_LIST_ID);
+            listTitle = extras.getString(EXTRA_LIST_TITLE);
         }
 
         // set list's title view
@@ -62,7 +63,7 @@ public class ListDetailsActivity  extends AppCompatActivity implements DetailsAc
 
     private void setFabResponse(FloatingActionButton fab) {
         fab.setOnClickListener(view -> {
-            presenter.addShoppingItem(getString(R.string.default_item_name));
+            presenter.addShoppingItem(getString(R.string.default_item_name), listID);
         });
     }
 

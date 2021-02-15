@@ -12,8 +12,8 @@ public interface DetailsActivityMVP {
     interface Presenter {
         void setUpDAO(Context appContext);
         void showListItemsInGUI(int listID);
-        void addShoppingItem(String name);
-        void addShoppingItem(String name, int amount);
+        void addShoppingItem(String name, int shoppingListId);
+        void addShoppingItem(String name, int amount, int shoppingListId);
         void changeItemName(String newName, int itemId);
         void changeItemAmount(int newAmount, int itemId);
         void changeItemCheckedState(boolean isChecked, int itemId);

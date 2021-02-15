@@ -20,12 +20,13 @@ public class ShoppingItem {
     public boolean checked = false;
 
     @Ignore
-    public ShoppingItem(String name) {
+    public ShoppingItem(String name, int shoppingListId) {
         this.name = name;
+        this.shoppingListId = shoppingListId;
     }
 
-    public ShoppingItem(String name, int amount) {
-        this(name);
+    public ShoppingItem(String name, int amount, int shoppingListId) {
+        this(name, shoppingListId);
         this.amount = amount;
     }
 

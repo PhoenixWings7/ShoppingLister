@@ -34,18 +34,18 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
     }
 
     @Override
-    public void addShoppingItem(String name) {
-        addShoppingItem(name, 0);
+    public void addShoppingItem(String name, int shoppingListId) {
+        addShoppingItem(name, 0, shoppingListId);
     }
 
     @Override
-    public void addShoppingItem(String name, int amount) {
+    public void addShoppingItem(String name, int amount, int shoppingListId) {
         if (name != null) {
             ShoppingItem shoppingItem;
             if (amount > 0) {
-                shoppingItem = new ShoppingItem(name, amount);
+                shoppingItem = new ShoppingItem(name, amount, shoppingListId);
             } else {
-                shoppingItem = new ShoppingItem(name);
+                shoppingItem = new ShoppingItem(name, shoppingListId);
             }
             InsertItemsAsyncTask insertTask = new InsertItemsAsyncTask(shoppingItemsDao);
             insertTask.execute(shoppingItem);
