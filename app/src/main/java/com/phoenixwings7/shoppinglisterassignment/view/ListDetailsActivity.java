@@ -1,6 +1,7 @@
 package com.phoenixwings7.shoppinglisterassignment.view;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -58,7 +59,12 @@ public class ListDetailsActivity  extends AppCompatActivity implements DetailsAc
 
         // set response for saving button
         Button saveBtn = findViewById(R.id.save_details_btn);
-        saveBtn.setOnClickListener(view -> finish());
+        saveBtn.setOnClickListener(view -> saveAndFinish(saveBtn));
+    }
+
+    private void saveAndFinish(Button saveBtn) {
+        saveBtn.requestFocusFromTouch();
+        finish();
     }
 
     private void setFabResponse(FloatingActionButton fab) {
