@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_1">Listy Zakupów</string>
+    <string name="tab_2">Archiwum</string>
+    <string name="default_fragment_info">Ładowanie...</string>
+    <string name="add_new_shopping_list">Dodaj nową listę zakupów</string>
+    <string name="add_new_item">Dodaj nową pozycję</string>
+    <string name="label_list_title">Tytuł twojej listy</string>
+    <string name="save">Zapisz</string>
+    <string name="default_item_name">Twoja pozycja</string>
+    <string name="default_list_title">Tytuł Twojej Listy</string>
+    <string name="list_details_activity_label">Szczegóły listy</string>
+    <string name="item_amount">"Ilość: "</string>
+</resources>

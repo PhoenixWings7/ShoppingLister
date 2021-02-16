@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shopping Lister</string>
+    <string name="app_name" translatable="false">Shopping Lister</string>
 
     <!--    Tabs' titles-->
     <string name="tab_1">Shopping Lists</string>
