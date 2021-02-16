@@ -10,8 +10,9 @@
     <string name="add_new_item">Add new item</string>
     <string name="label_list_title">Your list\'s title</string>
     <string name="save">Save</string>
-    <string name="default_item_name">Your Item</string>
+    <string name="default_item_name" translatable="false" />
     <string name="default_list_title">Your List Title</string>
     <string name="list_details_activity_label">List details</string>
     <string name="item_amount">Amount: </string>
+    <string name="item_name_hint">Your item</string>
 </resources>

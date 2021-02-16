@@ -7,8 +7,8 @@
     <string name="add_new_item">Dodaj nową pozycję</string>
     <string name="label_list_title">Tytuł twojej listy</string>
     <string name="save">Zapisz</string>
-    <string name="default_item_name">Twoja pozycja</string>
     <string name="default_list_title">Tytuł Twojej Listy</string>
     <string name="list_details_activity_label">Szczegóły listy</string>
     <string name="item_amount">"Ilość: "</string>
+    <string name="item_name_hint">Twoja pozycja</string>
 </resources>
