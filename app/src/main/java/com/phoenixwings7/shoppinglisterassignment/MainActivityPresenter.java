@@ -46,7 +46,7 @@ public class MainActivityPresenter implements MainMVP.Presenter {
 
     @Override
     public void saveShoppingList(String title) {
-        appRepository.saveShoppingList(new ShoppingList(title), () -> {}, x -> {});
+        appRepository.saveShoppingList(new ShoppingList(title));
     }
 
     @Override

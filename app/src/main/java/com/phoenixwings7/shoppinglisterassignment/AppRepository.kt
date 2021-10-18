@@ -24,13 +24,12 @@ class AppRepository(appDatabase: AppDatabase) : ListRepo {
         return listDao.getShoppingListTitle(id)
     }
 
-    override fun saveShoppingList(shoppingList: ShoppingList?, actionOnComplete: Action,
-                                  onErrorAction: Consumer<Throwable>) {
+    override fun saveShoppingList(shoppingList: ShoppingList?) {
         val completable = listDao.saveShoppingList(shoppingList)
         completable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(actionOnComplete, onErrorAction)
+            .subscribe()
     }
 
 }

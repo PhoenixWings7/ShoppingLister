@@ -1,5 +1,7 @@
 package com.phoenixwings7.shoppinglisterassignment.view;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,6 @@ import com.phoenixwings7.shoppinglisterassignment.R;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingItem;
 
 import java.util.List;
-
-import static java.lang.Integer.parseInt;
 
 public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholderView>{
     private List<ShoppingItem> itemsList;

@@ -12,6 +12,5 @@ interface ListRepo {
 
     fun getShoppingListTitle(id: Int): String?
 
-    fun saveShoppingList(shoppingList: ShoppingList?, actionOnComplete: Action,
-                         onErrorAction: Consumer<Throwable>)
+    fun saveShoppingList(shoppingList: ShoppingList?)
 }
