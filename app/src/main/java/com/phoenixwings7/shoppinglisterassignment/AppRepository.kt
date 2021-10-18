@@ -1,16 +1,13 @@
 package com.phoenixwings7.shoppinglisterassignment
 
 import androidx.lifecycle.LiveData
-import com.phoenixwings7.shoppinglisterassignment.database.AppDatabase
-import com.phoenixwings7.shoppinglisterassignment.database.ShoppingList
-import com.phoenixwings7.shoppinglisterassignment.database.ShoppingListDao
+import com.phoenixwings7.shoppinglisterassignment.database.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.functions.Action
-import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class AppRepository(appDatabase: AppDatabase) : ListRepo {
+class AppRepository(appDatabase: AppDatabase) : ListRepo, ListItemsRepo {
     private val listDao: ShoppingListDao = appDatabase.shoppingListDao()
+    private val itemsDao: ShoppingItemsDao = appDatabase.shoppingItemsDao()
 
     override fun getActiveShoppingLists(): LiveData<List<ShoppingList?>?>? {
         return listDao.activeShoppingLists
@@ -26,6 +23,26 @@ class AppRepository(appDatabase: AppDatabase) : ListRepo {
 
     override fun saveShoppingList(shoppingList: ShoppingList?) {
         val completable = listDao.saveShoppingList(shoppingList)
+        completable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+    }
+
+    override fun getShoppingListItems(listID: Int): LiveData<List<ShoppingItem>> {
+        return itemsDao.getShoppingListItems(listID)
+    }
+
+    override fun addItem(item: ShoppingItem) {
+        val completable = itemsDao.addItem(item)
+        completable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+    }
+
+    override fun updateItem(item: ShoppingItem) {
+        val completable = itemsDao.updateItem(item)
         completable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

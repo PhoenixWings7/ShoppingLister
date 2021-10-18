@@ -5,16 +5,13 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 
 import com.phoenixwings7.shoppinglisterassignment.database.AppDatabase;
-import com.phoenixwings7.shoppinglisterassignment.database.InsertItemsAsyncTask;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingItem;
-import com.phoenixwings7.shoppinglisterassignment.database.ShoppingItemsDao;
-import com.phoenixwings7.shoppinglisterassignment.database.UpdateItemAsyncTask;
 
 import java.util.List;
 
 public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
     private DetailsActivityMVP.View detailsView;
-    private ShoppingItemsDao shoppingItemsDao;
+    private AppRepository appRepository;
     private LiveData<List<ShoppingItem>> itemsListLiveData;
 
     public DetailsActivityPresenter(Context appContext, DetailsActivityMVP.View detailsView, int listID){
@@ -25,7 +22,7 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
 
     @Override
     public void setUpDAO(Context appContext) {
-        this.shoppingItemsDao = AppDatabase.getInstance(appContext).shoppingItemsDao();
+        this.appRepository = new AppRepository(AppDatabase.getInstance(appContext));
     }
 
     @Override
@@ -47,8 +44,7 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
             } else {
                 shoppingItem = new ShoppingItem(name, shoppingListId);
             }
-            InsertItemsAsyncTask insertTask = new InsertItemsAsyncTask(shoppingItemsDao);
-            insertTask.execute(shoppingItem);
+            appRepository.addItem(shoppingItem);
         }
     }
 
@@ -78,7 +74,7 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
     }
 
     private void setUpLiveData(int listID) {
-        itemsListLiveData = shoppingItemsDao.getShoppingListItems(listID);
+        itemsListLiveData = appRepository.getShoppingListItems(listID);
         itemsListLiveData.observe(detailsView.getViewLifecycleOwner(),
                 data -> detailsView.showItems(data));
     }
@@ -98,7 +94,6 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
     }
 
     private void updateItemInDB(ShoppingItem shoppingItem) {
-        UpdateItemAsyncTask asyncTask = new UpdateItemAsyncTask(shoppingItemsDao);
-        asyncTask.execute(shoppingItem);
+        appRepository.updateItem(shoppingItem);
     }
 }

@@ -8,14 +8,16 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+
 @Dao
 public interface ShoppingItemsDao {
     @Query("SELECT * FROM items WHERE list_id = :listID")
     LiveData<List<ShoppingItem>> getShoppingListItems(int listID);
 
     @Insert(entity = ShoppingItem.class)
-    void addItem(ShoppingItem item);
+    Completable addItem(ShoppingItem item);
 
     @Update(entity = ShoppingItem.class)
-    void updateItem(ShoppingItem item);
+    Completable updateItem(ShoppingItem item);
 }
