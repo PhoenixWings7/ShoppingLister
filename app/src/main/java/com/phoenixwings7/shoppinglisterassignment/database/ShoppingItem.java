@@ -6,12 +6,11 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "items")
+@Entity(tableName = "items", foreignKeys = {@ForeignKey(entity = ShoppingList.class, parentColumns = {"id"}, childColumns = "list_id")})
 public class ShoppingItem {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    @ForeignKey(entity = ShoppingList.class, parentColumns = {"list_id"}, childColumns = "id")
     @ColumnInfo(name = "list_id")
     public int shoppingListId;
 

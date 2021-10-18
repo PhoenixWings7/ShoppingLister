@@ -7,6 +7,8 @@ import androidx.room.Query;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+
 @Dao
 public interface ShoppingListDao {
     @Query("SELECT * FROM shopping_lists WHERE NOT is_archived ORDER BY id ASC")
@@ -19,5 +21,5 @@ public interface ShoppingListDao {
     String getShoppingListTitle(int id);
 
     @Insert(entity = ShoppingList.class)
-    void saveShoppingList(ShoppingList shoppingList);
+    Completable saveShoppingList(ShoppingList shoppingList);
 }

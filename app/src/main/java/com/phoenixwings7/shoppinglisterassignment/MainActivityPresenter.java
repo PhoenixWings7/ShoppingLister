@@ -6,15 +6,13 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
 import com.phoenixwings7.shoppinglisterassignment.database.AppDatabase;
-import com.phoenixwings7.shoppinglisterassignment.database.InsertListAsyncTask;
 import com.phoenixwings7.shoppinglisterassignment.database.ShoppingList;
-import com.phoenixwings7.shoppinglisterassignment.database.ShoppingListDao;
 
 import java.util.List;
 
 public class MainActivityPresenter implements MainMVP.Presenter {
     @Nullable private MainMVP.View mainView;
-    private ShoppingListDao shoppingListDao;
+    private AppRepository appRepository;
     private LiveData<List<ShoppingList>> activeShoppingLists;
     private LiveData<List<ShoppingList>> archivedShoppingLists;
 
@@ -26,14 +24,14 @@ public class MainActivityPresenter implements MainMVP.Presenter {
     }
 
     private void setUpLiveData() {
-        this.activeShoppingLists = shoppingListDao.getActiveShoppingLists();
-        this.archivedShoppingLists = shoppingListDao.getArchivedShoppingLists();
+        this.activeShoppingLists = appRepository.getActiveShoppingLists();
+        this.archivedShoppingLists = appRepository.getArchivedShoppingLists();
     }
 
     @Override
     public boolean setUpDAO(Context appContext) {
         if (mainView != null) {
-            shoppingListDao = AppDatabase.getInstance(appContext).shoppingListDao();
+            appRepository = new AppRepository(AppDatabase.getInstance(appContext));
         }
         else {
             return false;
@@ -48,8 +46,7 @@ public class MainActivityPresenter implements MainMVP.Presenter {
 
     @Override
     public void saveShoppingList(String title) {
-        InsertListAsyncTask insertListAsyncTask = new InsertListAsyncTask(shoppingListDao);
-        insertListAsyncTask.execute(new ShoppingList(title));
+        appRepository.saveShoppingList(new ShoppingList(title), () -> {}, x -> {});
     }
 
     @Override
