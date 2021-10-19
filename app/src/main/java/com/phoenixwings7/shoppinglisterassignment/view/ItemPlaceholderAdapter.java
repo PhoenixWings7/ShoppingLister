@@ -3,6 +3,8 @@ package com.phoenixwings7.shoppinglisterassignment.view;
 import static java.lang.Integer.parseInt;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,14 +45,20 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
         holder.itemAmount.setText(itemAmount);
         holder.checkBox.setChecked(item.checked);
 
-        holder.itemTitle.setOnFocusChangeListener((view, hasFocus) -> {
-            if (!hasFocus) {
-                String newName = holder.itemTitle.getText().toString();
-                if(!newName.equals(itemName)) {
-                    detailsActivity.onItemNameChanged(newName, item.id);
-                }
+        TextWatcher titleTextWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String newTitle = editable.toString();
+                detailsActivity.onItemNameChanged(newTitle, item.id);
             }
-        });
+        };
+        holder.itemTitle.addTextChangedListener(titleTextWatcher);
 
         holder.itemAmount.setOnFocusChangeListener(((view, hasFocus) -> {
             if (!hasFocus) {
