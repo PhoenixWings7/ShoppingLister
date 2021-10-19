@@ -60,8 +60,11 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NewListActivity.REQUEST_CODE && resultCode == RESULT_OK) {
-            String listTitle = data.getStringExtra(NewListActivity.RESULT_TITLE);
-            mainPresenter.saveShoppingList(listTitle);
+            String listTitle;
+            if (data != null) {
+                listTitle = data.getStringExtra(NewListActivity.RESULT_TITLE);
+                mainPresenter.saveShoppingList(listTitle);
+            }
         }
 
     }
