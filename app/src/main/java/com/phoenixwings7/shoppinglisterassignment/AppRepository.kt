@@ -3,6 +3,7 @@ package com.phoenixwings7.shoppinglisterassignment
 import androidx.lifecycle.LiveData
 import com.phoenixwings7.shoppinglisterassignment.database.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class AppRepository(appDatabase: AppDatabase) : ListRepo, ListItemsRepo {
@@ -23,10 +24,17 @@ class AppRepository(appDatabase: AppDatabase) : ListRepo, ListItemsRepo {
 
     override fun saveShoppingList(shoppingList: ShoppingList?) {
         val completable = listDao.saveShoppingList(shoppingList)
-        completable
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+        executeSimpleCompletable(completable)
+    }
+
+    override fun deleteShoppingList(shoppingList: ShoppingList?) {
+        val completable = listDao.deleteList(shoppingList)
+        executeSimpleCompletable(completable)
+    }
+
+    override fun deleteShoppingList(listId: Int) {
+        val completable = listDao.deleteList(listId)
+        executeSimpleCompletable(completable)
     }
 
     override fun getShoppingListItems(listID: Int): LiveData<List<ShoppingItem>> {
@@ -35,14 +43,25 @@ class AppRepository(appDatabase: AppDatabase) : ListRepo, ListItemsRepo {
 
     override fun addItem(item: ShoppingItem) {
         val completable = itemsDao.addItem(item)
-        completable
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+        executeSimpleCompletable(completable)
     }
 
     override fun updateItem(item: ShoppingItem) {
         val completable = itemsDao.updateItem(item)
+        executeSimpleCompletable(completable)
+    }
+
+    override fun deleteItem(item: ShoppingItem?) {
+        val completable = itemsDao.deleteItem(item)
+        executeSimpleCompletable(completable)
+    }
+
+    override fun deleteItem(itemId: Int) {
+        val completable = itemsDao.deleteItem(itemId)
+        executeSimpleCompletable(completable)
+    }
+
+    private fun executeSimpleCompletable(completable: Completable) {
         completable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -10,4 +10,7 @@ interface ListItemsRepo {
 
     fun updateItem(item: ShoppingItem)
 
+    fun deleteItem(item: ShoppingItem?)
+
+    fun deleteItem(itemId: Int)
 }

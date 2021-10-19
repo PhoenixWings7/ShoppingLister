@@ -13,4 +13,8 @@ interface ListRepo {
     fun getShoppingListTitle(id: Int): String?
 
     fun saveShoppingList(shoppingList: ShoppingList?)
+
+    fun deleteShoppingList(shoppingList: ShoppingList?)
+
+    fun deleteShoppingList(listId: Int)
 }

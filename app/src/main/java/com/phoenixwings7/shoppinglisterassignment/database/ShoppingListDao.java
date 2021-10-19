@@ -2,6 +2,7 @@ package com.phoenixwings7.shoppinglisterassignment.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -22,4 +23,10 @@ public interface ShoppingListDao {
 
     @Insert(entity = ShoppingList.class)
     Completable saveShoppingList(ShoppingList shoppingList);
+
+    @Delete(entity = ShoppingList.class)
+    Completable deleteList(ShoppingList shoppingList);
+
+    @Query("DELETE FROM shopping_lists WHERE id = :id")
+    Completable deleteList(int id);
 }
