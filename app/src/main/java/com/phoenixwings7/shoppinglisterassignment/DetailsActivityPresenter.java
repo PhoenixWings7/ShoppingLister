@@ -22,7 +22,7 @@ public class DetailsActivityPresenter implements DetailsActivityMVP.Presenter {
 
     @Override
     public void setUpDAO(Context appContext) {
-        this.appRepository = new AppRepository(AppDatabase.getInstance(appContext));
+        this.appRepository = AppRepository.Instance.getInstance(AppDatabase.getInstance(appContext));
     }
 
     @Override

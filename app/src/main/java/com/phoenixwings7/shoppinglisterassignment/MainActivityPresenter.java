@@ -31,7 +31,7 @@ public class MainActivityPresenter implements MainMVP.Presenter {
     @Override
     public boolean setUpDAO(Context appContext) {
         if (mainView != null) {
-            appRepository = new AppRepository(AppDatabase.getInstance(appContext));
+            appRepository = AppRepository.Instance.getInstance(AppDatabase.getInstance(appContext));
         }
         else {
             return false;

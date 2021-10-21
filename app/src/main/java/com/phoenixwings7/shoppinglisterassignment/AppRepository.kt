@@ -6,9 +6,20 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class AppRepository(appDatabase: AppDatabase) : ListRepo, ListItemsRepo {
+class AppRepository private constructor(private val appDatabase: AppDatabase): ListRepo, ListItemsRepo {
     private val listDao: ShoppingListDao = appDatabase.shoppingListDao()
     private val itemsDao: ShoppingItemsDao = appDatabase.shoppingItemsDao()
+
+    // Singleton pattern because we only need one AppRepository for the whole app
+    companion object Instance{
+        private var repository: AppRepository? = null
+        fun getInstance(appDatabase: AppDatabase): AppRepository {
+            if (repository == null) {
+                repository = AppRepository(appDatabase)
+            }
+            return repository!!
+        }
+    }
 
     override fun getActiveShoppingLists(): LiveData<List<ShoppingList?>?>? {
         return listDao.activeShoppingLists
