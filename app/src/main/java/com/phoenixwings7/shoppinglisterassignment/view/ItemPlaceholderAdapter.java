@@ -46,7 +46,49 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
         holder.itemAmount.setText(itemAmount);
         holder.checkBox.setChecked(item.checked);
 
-        TextWatcher titleTextWatcher = new TextWatcher() {
+        TextWatcher titleTextWatcher = getTitleTextWatcher(item);
+        holder.itemTitle.addTextChangedListener(titleTextWatcher);
+
+        TextWatcher amountTextWatcher = getAmountTextWatcher(item);
+        holder.itemAmount.addTextChangedListener(amountTextWatcher);
+
+        holder.checkBox.setOnClickListener((view) -> {
+            CheckBox checkBoxView = (CheckBox) view;
+            boolean isChecked = checkBoxView.isChecked();
+            detailsActivity.onCheckboxStateChanged(isChecked, item.id);
+        });
+    }
+
+    @NonNull
+    private TextWatcher getAmountTextWatcher(ShoppingItem item) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int newAmount;
+                try {
+                    newAmount = parseInt(editable.toString());
+                }
+                catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                if (newAmount != item.amount) {
+                    detailsActivity.onItemAmountChanged(newAmount, item.id);
+                }
+
+            }
+        };
+    }
+
+    @NonNull
+    private TextWatcher getTitleTextWatcher(ShoppingItem item) {
+        return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -59,29 +101,6 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
                 detailsActivity.onItemNameChanged(newTitle, item.id);
             }
         };
-        holder.itemTitle.addTextChangedListener(titleTextWatcher);
-
-        holder.itemAmount.setOnFocusChangeListener(((view, hasFocus) -> {
-            if (!hasFocus) {
-                int newAmount;
-                try {
-                    newAmount = parseInt(holder.itemAmount.getText().toString());
-                }
-                catch (NumberFormatException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                if (newAmount != item.amount) {
-                    detailsActivity.onItemAmountChanged(newAmount, item.id);
-                }
-            }
-        }));
-
-        holder.checkBox.setOnClickListener((view) -> {
-            CheckBox checkBoxView = (CheckBox) view;
-            boolean isChecked = checkBoxView.isChecked();
-            detailsActivity.onCheckboxStateChanged(isChecked, item.id);
-        });
     }
 
     @Override
