@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.phoenixwings7.shoppinglisterassignment.R;
@@ -92,7 +93,65 @@ public class ItemPlaceholderAdapter extends RecyclerView.Adapter<ItemPlaceholder
     }
 
     public void setData(List<ShoppingItem> data) {
+        if (itemsList == null) {
+            this.itemsList = data;
+            notifyDataSetChanged();
+        }
+        else {
+            updateData(data);
+        }
+    }
+
+    public void updateData(List<ShoppingItem> data) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(getDiffCb(itemsList, data), false);
         this.itemsList = data;
-        notifyDataSetChanged();
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+    @NonNull
+    private DiffUtil.Callback getDiffCb(List<ShoppingItem> oldList, List<ShoppingItem> newList) {
+        return new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                if (oldList.isEmpty()) {
+                    return 0;
+                }
+                return oldList.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                if (newList.isEmpty()) {
+                    return 0;
+                }
+                return newList.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                ShoppingItem oldItem = oldList.get(oldItemPosition);
+                ShoppingItem newItem = newList.get(newItemPosition);
+                return oldItem.id == newItem.id;
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                ShoppingItem oldItem = oldList.get(oldItemPosition);
+                ShoppingItem newItem = newList.get(newItemPosition);
+                boolean areContentsSame = false;
+
+                if (oldItem.id == newItem.id) {
+                    if (oldItem.name.equals(newItem.name)) {
+                        if (oldItem.getAmount() == newItem.getAmount()) {
+                            if (oldItem.isChecked() == newItem.isChecked()) {
+                                areContentsSame = true;
+                            }
+                        }
+                    }
+                }
+
+                return areContentsSame;
+            }
+        };
     }
 }
